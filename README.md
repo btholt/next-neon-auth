@@ -7,6 +7,7 @@ This is a [Next.js](https://nextjs.org) project using the App Router that server
 - Next.js with the App Router, TypeScript and Tailwind CSS
 - User authentication powered by Stack Auth
 - Integration with Neon Auth
+- Database migration infrastructure with Neon branching support
 - Ready-to-deploy configuration for Vercel, Netlify, and Render
 
 ## Prerequisites
@@ -52,10 +53,46 @@ This is a [Next.js](https://nextjs.org) project using the App Router that server
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Database Migrations
+
+This project includes a migration infrastructure for managing database schema changes safely.
+
+### Running Migrations
+
+```bash
+# Apply the articles table migration
+npm run migrate:articles:up
+
+# Rollback the articles table migration
+npm run migrate:articles:down
+
+# Or use the generic migrate command
+npm run migrate 001_create_articles_table up
+```
+
+### Safe Migration Testing with Neon Branching
+
+For production safety, test migrations on a Neon branch first:
+
+1. Install Neon CLI: `npm install -g neonctl`
+2. Create a test branch: `neonctl branches create --name test-migration`
+3. Get the branch connection string and test the migration
+4. Apply to production after verification
+
+See [migrations/TESTING_GUIDE.md](migrations/TESTING_GUIDE.md) for detailed step-by-step instructions.
+
+### Migration Files
+
+- **migrations/README.md** - Complete migration documentation
+- **migrations/TESTING_GUIDE.md** - Step-by-step guide for testing with Neon branching
+- **migrations/001_create_articles_table/** - Articles table migration
+- **migrations/examples/** - Example code for using the articles table
+
 ## Learn More
 
 - [Neon Auth Documentation](https://neon.tech/docs/guides/neon-identity)
 - [Stack Auth Documentation](https://docs.stack-auth.com/)
+- [Neon Branching Guide](https://neon.tech/docs/guides/branching)
 
 ## Authors
 
