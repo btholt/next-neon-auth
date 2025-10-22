@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate": "node migrations/run-migration.js",
+    "migrate:articles:up": "node migrations/run-migration.js 001_create_articles_table up",
+    "migrate:articles:down": "node migrations/run-migration.js 001_create_articles_table down"
   },
   "dependencies": {
     "@stackframe/stack": "2.7.6",
